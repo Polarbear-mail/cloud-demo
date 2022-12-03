@@ -1,5 +1,6 @@
 package cn.itcast.user.web;
 
+import cn.itcast.user.config.PatternProperties;
 import cn.itcast.user.pojo.User;
 import cn.itcast.user.service.UserService;
 import com.alibaba.nacos.api.config.annotation.NacosValue;
@@ -16,21 +17,32 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 @RestController
 @RequestMapping("/user")
-@RefreshScope
+//@RefreshScope
 public class UserController {
 
     @Autowired
     private UserService userService;
 
+//     //更改热更新
+//    @Value("${pattern.dateformat}")
+//    private String dateformat;
+    @Autowired
+    private PatternProperties properties;
 
-    @Value("${pattern.dateformat}")
-    private String dateformat;
+    //获取热更新数据
+    @GetMapping("prop")
+    public PatternProperties properties(){
+        return properties;
+    }
 
-
+    //测试热更新 时间
     @GetMapping("now")
     public String now(){
-        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(dateformat));
+        return LocalDateTime.now().format(DateTimeFormatter.ofPattern(properties.getDateformat()));
     }
+
+
+
 
     /**
      * 路径： /user/110
