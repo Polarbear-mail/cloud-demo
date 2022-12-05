@@ -43,5 +43,5 @@ ribbon:
 feign:
   client:
     config:
-      default:
-        loggerLevel: FULL
+      default:    # 也可以在java代码中配置
+        loggerLevel: FULL  　
