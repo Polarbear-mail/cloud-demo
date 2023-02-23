@@ -17,6 +17,7 @@ import java.time.format.DateTimeFormatter;
 @Slf4j
 @RestController
 @RequestMapping("/user")
+// 热更新配置加载
 //@RefreshScope
 public class UserController {
 
@@ -51,7 +52,8 @@ public class UserController {
      * @return 用户
      */
     @GetMapping("/{id}")
-    public User queryById(@PathVariable("id") Long id) {
+    public User queryById(@PathVariable("id") Long id, @RequestHeader(value= "Truth",required = false) String  truth) {
+        System.out.println("truth: "+truth);
         return userService.queryById(id);
     }
 }
